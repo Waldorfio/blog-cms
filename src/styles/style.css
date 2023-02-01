@@ -34,9 +34,12 @@ a {    /* Removes default styling for links, and React Links */
 h1 {
     font-weight: 700;
 }
+h1:hover {
+    text-decoration: underline;
+}
 header {
     display: grid;
-    grid-template-columns: 200px repeat(3, 90px) 1fr repeat(2, 90px);
+    grid-template-columns: 1fr repeat(2, 90px);
     gap: 10px;
     align-items: center;
 
@@ -48,16 +51,42 @@ header {
     user-select: none;
     border-bottom: 1px solid rgb(185, 185, 185);
 }
-.links > h4 {
-    transition: transform 0.5s;
+#login-btn, #register-btn > button {
+    width: 360px;
+    height: 50px;
+    border: 2px solid #eee;
+    background-color:#b6bdc9;
+    text-align: center;
+    letter-spacing: 0.7px;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    width: 100%;
+    padding: 7px;
 }
-.links > h4:hover {
-    transform: scale(1.1);
-    text-decoration: underline;
-    color: rgb(97, 97, 97)
+#register-btn > button {
+    margin-right: 7px;
+    background-color: #e9ecf0;
+    color: #1859c9;
+    border: 1px solid #1859c9;
+    transition: background-color 0.3s, color 0.3s, border 0.3s;
 }
-header > button {
-    height: 30px;
+#register-btn > button:hover {
+    background-color: #1859c9;
+    color: white;
+    border: 1px solid white;
+}
+#login-btn {
+    background-color: #1859c9;
+    color: white;
+    border: 1px solid #1859c9;
+    transition: background-color 0.3s, color 0.3s, border 0.3s;
+}
+#login-btn:hover {
+    background-color: #e9ecf0;
+    color: #1859c9;
+    border: 1px solid #1859c9;
 }
 
 /* MAIN
@@ -66,90 +95,139 @@ header > button {
     display: grid;
     align-items: center;
     justify-items: center;
-    text-align: center;
-    height: 100px;
+    height: 200px;
     margin: 30px;
-    font-size: 1.2em;
+    border-bottom: 1px solid rgb(190, 190, 190);
+}
+.all-posts {
+    text-align: center;
+    font-size: 2.0em;
+    user-select: none;
 }
 #content {
     display: grid;
-    grid-template-columns: 1fr repeat(3, 300px) 1fr;
-    grid-template-rows: auto;
-    gap: 20px;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 10px;
     align-items: center;
     justify-items: center;
 
     margin: 0 auto;
-    padding: 10px;
-    padding-bottom: 20px;
+    padding: 20px;
 }
-.post {
+.post, .msg {
     display: grid;
+    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-columns: 100px 1fr;
     align-items: center;
-    justify-items: center;
-    width: 250px;
+
     border: 1px solid #ddd;
     padding: 20px;
     margin-bottom: 20px;
     transition: background-color 0.5s, border 0.5s;
+
+    width: 300px;
 }
-.post:hover {
+.post:hover, .msg:hover {
     background-color: rgb(230, 230, 230);
     border: 1px solid rgb(145, 145, 145);
 }
-.post > h2 {
+.post > h2, .msg > h2 {
     grid-column: 1/3;
     margin: 0;
     font-size: 24px;
 }
-.post > h2:hover {
+.post > h2:hover, .msg > h2:hover {
     text-decoration: underline;
     cursor: pointer;
 }
-#user-card{grid-column: 2/3}
-#post-card{grid-column: 3/4}
-#msg-card{grid-column: 4/5}
-button {
-    text-align: center;
-    cursor: pointer;
-    color: #fff;
-    border: 2px solid transparent;
-    border-color: #000;
-    color: #000;
-    background: transparent;
-    font-weight: 800;
-    transition: background,color .1s ease-in-out;
+.content-snapshot, .msg-snapshot {
+    grid-column: 1/3;
+    grid-row: 2/3;
 }
-button:hover {
-    background-color: #000;
-    color: #fff;
+.content-snapshot > p {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    margin: 0;
+}
+.content-snapshot > a {
+    color: blue;
+    font-size: 0.9em;
+}
+.content-snapshot > a:hover {
+    text-decoration: underline;
+}
+.msg-count, .like-count {
+    grid-column: 1/2;
+    grid-row: 3/4;
+    align-self: center;
+    justify-self: center;
+    user-select: none;
+}
+.msg-number, .like-number {
+    position: relative;
+    top: 12px;
+    right: 9px;
+    font-size: 1.5em;
+    font-weight: 500;
+    color: red;
+}
+.like-count {
+    cursor: pointer;
+}
+.like-count > .material-symbols-outlined {
+    font-weight: 200;
+    font-size: 36px;
+    color: #3b5998;
+    border: 3px solid #3b5998;
+    border-radius: 50%;
+    padding: 5px;
+}
+.post-details, .msg-details {
+    grid-column: 2/3;
+    grid-row: 3/4;
+    display: grid;
+    gap: 5px;
+    justify-items: end;
+}
+.author {
+    font-weight: bold;
+}
+.date {
+    color: #999;
+    user-select: none;
 }
 
-/* USERS, POSTS, MESSAGES
+/* POST PAGE
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
-.cms-form {
+#detailed-post {
     display: grid;
-    grid-template-columns: repeat(3, 160px) repeat(3, 70px);
-    gap: 5px;
-    justify-content: center;
+    align-items: center;
+    justify-items: center;
+    padding: 30px;
 }
-.cms-form > input {
-    margin-bottom: 1.3rem;
-    border: 1px solid #ddd;
-    border-radius: 6px;
-    outline: none;
+#detailed-post > span {
+    padding-left: 1.3rem;
+    padding-right: 1.3rem;
+    max-width: 1000px;
 }
-.cms-form > input:focus {
-    box-shadow: 0 1px 0 rgba(0,0,0,0.2);
-}
-h4 {
+#like-post {
+    margin: 40px;
+    padding-top: 30px;
+    padding-bottom: 30px;
     text-align: center;
+    border-top: 1px solid grey;
+    border-bottom: 1px solid grey;
 }
-#posts-form {
-    grid-template-columns: repeat(4, 160px) repeat(3, 70px);
+#comment-form {
 }
-#msg-content > .cms-form {
-    grid-template-columns: repeat(2, 120px) 250px repeat(3, 70px);
+
+#comment-noform {
+    display: grid;
+    grid-template-rows: repeat(3, 40px);
+    gap: 5px;
+    align-items: center;
+    justify-items: center;
 }
 
 /* REGISTER & LOGIN
@@ -227,10 +305,12 @@ h3 {
     letter-spacing: 1px;
     margin-top: 1.7rem;
     cursor: pointer;
-    transition: 0.4s;
+    transition: 0.3s;
 }
 .user-form > input[type='submit']:hover {
-    background: #006653;
+    background: #e9ecf0;
+    border: 1px solid #006653;
+    color: #006653;
 }
 .signup{
     font-size: 17px;
@@ -302,11 +382,10 @@ h3 {
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 header, #login-btn, #register-btn, #welcome, .all-posts, 
 #content, footer, #detailed-post, #like-post, #comment-form, 
-#comment-noform, #register, #login, #backdrop-shadow, .success-popup,
-.form-content {
+#comment-noform, #register, #login, #backdrop-shadow, .success-popup {
     opacity: 0;
     visibility: hidden;
-    animation-duration: 0.5s;
+    animation-duration: 0.7s;
     animation-timing-function: cubic-bezier();
     animation-fill-mode: forwards;
     -webkit-animation-timing-function: cubic-bezier();
@@ -317,21 +396,20 @@ header, #login-btn, #register-btn, #welcome, .all-posts,
 header, footer, #login, #backdrop-shadow, .success-popup {
     animation-delay: 0s;
 }
-#detailed-post, #register, .form-content {
+#detailed-post, #register {
     animation-delay: 0.3s;
 }
 #welcome, #login-btn, #register-btn, #like-post {
-    animation-delay: 0.4s;
+    animation-delay: 0.6s;
 }
 .all-posts, #content, #comment-form, #comment-noform {
-    animation-delay: 0.9s;
+    animation-delay: 1.2s;
 }
 header, .all-posts, #comment-form, #comment-noform {animation-name: slide-down}
-#login-btn, #register-btn, #like-post, #login, .success-popup, #content {animation-name: slide-left}
+#login-btn, #register-btn, #like-post, #login, .success-popup {animation-name: slide-left}
 #welcome, #detailed-post, #register {animation-name: slide-right}
-#footer {animation-name: slide-up}
+#content, #footer {animation-name: slide-up}
 #backdrop-shadow {animation-name: fade-in}
-.form-content {animation-name: grow-in}
 @keyframes slide-right {
     0% {
         opacity: 0%;
@@ -399,18 +477,6 @@ header, .all-posts, #comment-form, #comment-noform {animation-name: slide-down}
     }
     100% {
         opacity: 25%;
-        visibility: visible;
-    }
-}
-@keyframes grow-in {
-    0% {
-        scale: 0.8;
-        opacity: 0%;
-        visibility: hidden;
-    }
-    100% {
-        scale: 1.0;
-        opacity: 100%;
         visibility: visible;
     }
 }
