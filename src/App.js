@@ -3,7 +3,7 @@ import { Outlet } from 'react-router-dom';
 import './styles/style.css';
 import Header from './components/Header';
 import Footer from './components/Footer';
-import Success from './components/Success';
+// import Success from './components/Success';
 
 function App() {
   // State Decalarations
@@ -15,62 +15,61 @@ function App() {
   const [users, setUsers] = useState([]); // Stores GET response of all users in db
 
   // State Handlers
-  const loginSubmit = (event) => {
-    event.preventDefault();
-    const formData = new FormData(event.target);
-    setUser({
-      username: formData.get('username'),
-      password: formData.get('password'),
-    });
-    setLogIn(true); // set log in status to true
-    console.log('user logged in');
-    console.log(`username: ${user.username}`);
-    console.log(`password: ${user.password}`);
-  };
+  // const loginSubmit = (event) => {
+  //   event.preventDefault();
+  //   const formData = new FormData(event.target);
+  //   setUser({
+  //     username: formData.get('username'),
+  //     password: formData.get('password'),
+  //   });
+  //   setLogIn(true); // set log in status to true
+  //   console.log('user logged in');
+  //   console.log(`username: ${user.username}`);
+  //   console.log(`password: ${user.password}`);
+  // };
 
+  //   // DOM Handler functions
+  //   const loginRef = useRef(null);
+  //   const backdropRef = useRef(null);
+  //   const exitRef = useRef(null);
 
-//   // DOM Handler functions
-//   const loginRef = useRef(null);
-//   const backdropRef = useRef(null);
-//   const exitRef = useRef(null);
+  //   function handleLogin() { // Handles the login popup styling/hiding
+  //     const loginPopup = loginRef.current;
+  //     const backdrop = backdropRef.current;
+  //     if (loginPopup.style.display === 'none') { // show
+  //       loginPopup.style.display = '';
+  //       backdrop.style.visibility = 'visible';
+  //     } else { // hide
+  //       loginPopup.style.display = 'none';
+  //       backdrop.style.visibility = 'hidden';
+  // //       loginPopup.style.animation = 'fade-right 0.7s cubic-bezier() 0s'; // exit animation
+  // //       loginPopup.style['animation-fill-mode'] = 'forwards';
+  //     }
+  //   }
 
-//   function handleLogin() { // Handles the login popup styling/hiding
-//     const loginPopup = loginRef.current;
-//     const backdrop = backdropRef.current;
-//     if (loginPopup.style.display === 'none') { // show
-//       loginPopup.style.display = '';
-//       backdrop.style.visibility = 'visible';
-//     } else { // hide
-//       loginPopup.style.display = 'none';
-//       backdrop.style.visibility = 'hidden';
-// //       loginPopup.style.animation = 'fade-right 0.7s cubic-bezier() 0s'; // exit animation
-// //       loginPopup.style['animation-fill-mode'] = 'forwards';
-//     }
-//   }
-  
-//   function exitLogin() { // Handles interaction with login popup cross
-//     const cross = exitRef.current;
-//     if (loginPopup.style.display === 'none') { // show
-//       loginPopup.style.display = '';
-//       backdrop.style.visibility = 'visible';
-//     } else { // hide
-//       loginPopup.style.display = 'none';
-//       backdrop.style.visibility = 'hidden';
-// //       loginPopup.style.animation = 'fade-right 0.7s cubic-bezier() 0s'; // exit animation
-// //       loginPopup.style['animation-fill-mode'] = 'forwards';
-//     }
-//   }
+  //   function exitLogin() { // Handles interaction with login popup cross
+  //     const cross = exitRef.current;
+  //     if (loginPopup.style.display === 'none') { // show
+  //       loginPopup.style.display = '';
+  //       backdrop.style.visibility = 'visible';
+  //     } else { // hide
+  //       loginPopup.style.display = 'none';
+  //       backdrop.style.visibility = 'hidden';
+  // //       loginPopup.style.animation = 'fade-right 0.7s cubic-bezier() 0s'; // exit animation
+  // //       loginPopup.style['animation-fill-mode'] = 'forwards';
+  //     }
+  //   }
 
   return (
     <div className="App">
 
       <Header
-        handleLogin={handleLogin}
+        // handleLogin={handleLogin}
       />
 
-      <div id="backdrop-shadow" ref={backdropRef}></div>
+      {/* <div id="backdrop-shadow" ref={backdropRef} /> */}
 
-//       <div id="login" ref={loginRef}>
+      {/* //       <div id="login" ref={loginRef}>
 //         <h3>Login</h3>
 //         <div class="cross" ref={exitRef}><span class="material-symbols-outlined">cancel</span></div>
 //         <form className="user-form" onSubmit={loginSubmit} action="" method="post">
@@ -98,7 +97,7 @@ function App() {
 
 //       <Success
 //           successMsg="Log In Successful!"
-//       />
+//       /> */}
 
       <Outlet
         context={[
@@ -113,4 +112,3 @@ function App() {
 }
 
 export default App;
-

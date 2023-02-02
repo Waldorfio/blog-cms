@@ -9,12 +9,12 @@ function Users() {
       <div className="form-content">
 
         <form id="users-form" className="cms-form" action="" method="post">
-            <input type="text" name="username" value="Waldorfio" disabled>
-            <input type="text" name="email" value="test@gmail.com" disabled>
-            <input type="password" name="password" value="password" disabled>
-            <input type="button" value="EDIT">
-            <input type="submit" value="DELETE">
-            <input type="button" value="UPDATE" disabled>
+          <input type="text" name="username" value="Waldorfio" disabled />
+          <input type="text" name="email" value="test@gmail.com" disabled />
+          <input type="password" name="password" value="password" disabled />
+          <input type="button" value="EDIT" />
+          <input type="submit" value="DELETE" />
+          <input type="button" value="UPDATE" disabled />
         </form>
 
       </div>
