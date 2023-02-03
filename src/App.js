@@ -42,7 +42,7 @@ function App() {
   // Refresh API Calls
   useEffect(() => {
     fetchUsers();
-  }, [users]);
+  }, []);
   useEffect(() => {
     fetchPosts();
   }, [posts]);
@@ -138,7 +138,7 @@ function App() {
       <Outlet
         context={[
           user, isLoggedIn, // Passing on current logged in user
-          users, posts, msgs,
+          users, setUsers, fetchUsers, posts, msgs,
         ]}
       />
 
