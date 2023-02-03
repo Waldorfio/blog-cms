@@ -3,13 +3,13 @@ import React, { useState, useEffect } from 'react';
 import { useOutletContext, Link } from 'react-router-dom';
 
 function Users() {
-  const [user, isLoggedIn, users, posts, msgs] = useOutletContext();
+  const [user, isLoggedIn, users, setUsers, fetchUsers, posts, msgs] = useOutletContext();
 
   // --------- CREATE User ---------
   const [formData, setFormData] = useState({
     username: '',
     password: '',
-    admin: false,
+    admin: '',
   });
 
   const addUser = async (e) => {
@@ -30,12 +30,26 @@ function Users() {
   };
 
   // --------- UPDATE User ---------
+  const updateUser = async (usr) => {
+    try {
+    // Send post request
+      const res = await fetch(`https://blog-api-production-6aeb.up.railway.app/users/${usr._id}`, {
+        method: 'PUT',
+        headers: { 'Content-type': 'application/json; charset=UTF-8' },
+        body: JSON.stringify(usr),
+      });
+      const data = await res.json();
+      console.log(`User updated! ${usr._id}`);
+      fetchUsers();
+    } catch (err) { console.error(err); }
+  };
 
   // --------- DELETE User ---------
   const delUser = async (usr) => {
     try {
       await fetch(`https://blog-api-production-6aeb.up.railway.app/users/${usr._id}/delete`, { method: 'DELETE' });
       console.log(`User deleted! ${usr._id}`);
+      fetchUsers();
     } catch (err) { console.error(err); }
   };
 
@@ -50,12 +64,47 @@ function Users() {
         </div>
         { users.map((usr) => (
           <form className="cms-form">
-            <input type="text" name="username" value={usr.username} />
-            <input type="text" name="password" value={usr.password} />
-            <input type="checkbox" name="admin" value={usr.admin} />
-            <input type="button" value="EDIT" />
+            <input
+              type="text"
+              name="username"
+              value={usr.username}
+              onChange={(e) => setUsers( // Updating the users state every key change
+                users.map((checkUsr) => {
+                  if (checkUsr.username === usr.username) { // Finding the key of the current user
+                    return { ...checkUsr, username: e.target.value }; // Settings state of user
+                  }
+                  return checkUsr;
+                }),
+              )}
+            />
+            <input
+              type="text"
+              name="password"
+              value={usr.password}
+              onChange={(e) => setUsers( // Updating the users state every key change
+                users.map((checkUsr) => {
+                  if (checkUsr.password === usr.password) { // Finding the key of the current user
+                    return { ...checkUsr, password: e.target.value }; // Settings state of user
+                  }
+                  return checkUsr;
+                }),
+              )}
+            />
+            <input
+              type="checkbox"
+              name="admin"
+              value={usr.admin}
+              onChange={(e) => setUsers( // Updating the users state every key change
+                users.map((checkUsr) => {
+                  if (checkUsr.admin === usr.admin) { // Finding the key of the current user
+                    return { ...checkUsr, admin: e.target.value }; // Settings state of user
+                  }
+                  return checkUsr;
+                }),
+              )}
+            />
+            <input type="button" value="UPDATE" onClick={() => updateUser(usr)} />
             <input type="button" value="DELETE" onClick={() => delUser(usr)} />
-            <input type="button" value="UPDATE" />
           </form>
         )) }
 
