@@ -12,7 +12,43 @@ function App() {
     password: '',
   });
   const [isLoggedIn, setLogIn] = useState(false);
-  const [users, setUsers] = useState([]); // Stores GET response of all users in db
+  const [users, setUsers] = useState([]);
+  const [posts, setPosts] = useState([]);
+  const [msgs, setMsgs] = useState([]);
+
+  // API Calls
+  const fetchUsers = async () => {
+    try {
+      const res = await fetch('https://blog-api-production-6aeb.up.railway.app/users', { method: 'GET' });
+      const data = await res.json();
+      setUsers(data);
+    } catch (err) { console.error(err); }
+  };
+  const fetchPosts = async () => {
+    try {
+      const res = await fetch('https://blog-api-production-6aeb.up.railway.app/posts', { method: 'GET' });
+      const data = await res.json();
+      setPosts(data);
+    } catch (err) { console.error(err); }
+  };
+  const fetchMsgs = async () => {
+    try {
+      const res = await fetch('https://blog-api-production-6aeb.up.railway.app/posts', { method: 'GET' });
+      const data = await res.json();
+      setMsgs(data);
+    } catch (err) { console.error(err); }
+  };
+
+  // Refresh API Calls
+  useEffect(() => {
+    fetchUsers();
+  }, [users]);
+  useEffect(() => {
+    fetchPosts();
+  }, [posts]);
+  useEffect(() => {
+    fetchMsgs();
+  }, [msgs]);
 
   // State Handlers
   // const loginSubmit = (event) => {
@@ -102,6 +138,7 @@ function App() {
       <Outlet
         context={[
           user, isLoggedIn, // Passing on current logged in user
+          users, posts, msgs,
         ]}
       />
 
