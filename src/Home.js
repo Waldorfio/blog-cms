@@ -2,8 +2,10 @@
 import React, { useState, useEffect } from 'react';
 import { useOutletContext, Link } from 'react-router-dom';
 
+// State Decalarations
+
 function Home() {
-  const [user, isLoggedIn] = useOutletContext();
+  const [user, isLoggedIn, users, posts, msgs] = useOutletContext();
 
   return (
     <main id="home">
@@ -17,15 +19,15 @@ function Home() {
       <div id="content">
 
         <div id="user-card" className="post">
-          <a href="/users"><h2>Users</h2></a>
+          <Link to="/users"><h2>Users</h2></Link>
         </div>
 
         <div id="post-card" className="post">
-          <a href="/posts"><h2>Posts</h2></a>
+          <Link to="/posts"><h2>Posts</h2></Link>
         </div>
 
         <div id="msg-card" className="post">
-          <a href="/messages"><h2>Messages</h2></a>
+          <Link to="/messages"><h2>Messages</h2></Link>
         </div>
 
       </div>
