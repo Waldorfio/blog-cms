@@ -112,6 +112,37 @@ function Messages() {
           )) }
         </h4>
       )) }
+      <form id="cms-newmsg" className="cms-form">
+        <input
+          type="range"
+          name="post"
+          placeholder="Select Post"
+          value={formData.postid}
+          onChange={(e) => setFormData({ ...formData, postid: e.target.value })}
+        />
+        <input
+          type="text"
+          name="username"
+          placeholder="Enter username"
+          value={formData.username}
+          onChange={(e) => setFormData({ ...formData, username: e.target.value })}
+        />
+        <input
+          type="date"
+          name="date"
+          placeholder="Enter date"
+          value={formData.date_formatted}
+          onChange={(e) => setFormData({ ...formData, date: e.target.value })}
+        />
+        <input
+          type="textarea"
+          name="text"
+          placeholder="Type message here"
+          value={formData.text}
+          onChange={(e) => setFormData({ ...formData, text: e.target.value })}
+        />
+        <input type="button" value="CREATE" onClick={addMsg} />
+      </form>
     </main>
   );
 }
