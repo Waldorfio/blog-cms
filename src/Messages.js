@@ -94,12 +94,12 @@ function Messages() {
                 />
                 <input
                   type="textarea"
-                  name="message"
+                  name="text"
                   value={msg.text}
                   onChange={(e) => setMsgs(
                     msgs.map((checkMsg) => {
-                      if (checkMsg.message === msg.message) {
-                        return { ...checkMsg, message: e.target.value };
+                      if (checkMsg.text === msg.text) {
+                        return { ...checkMsg, text: e.target.value };
                       }
                       return checkMsg;
                     }),
