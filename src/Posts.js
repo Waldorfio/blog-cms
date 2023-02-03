@@ -1,6 +1,6 @@
 /* eslint-disable no-underscore-dangle */
-import React, { useState, useEffect } from 'react';
-import { useOutletContext, Link } from 'react-router-dom';
+import React, { useState } from 'react';
+import { useOutletContext } from 'react-router-dom';
 
 function Posts() {
   const [user, isLoggedIn, // Passing on current logged in user
@@ -80,7 +80,7 @@ function Posts() {
             <input
               type="date"
               name="date"
-              value={post.date}
+              value={post.date_formatted}
               onChange={(e) => setPosts(
                 posts.map((checkPost) => {
                   if (checkPost.date === post.date) {
@@ -121,7 +121,7 @@ function Posts() {
             type="date"
             name="date"
             placeholder="Enter date"
-            value={formData.date}
+            value={formData.date_formatted}
             onChange={(e) => setFormData({ ...formData, date: e.target.value })}
           />
           <input

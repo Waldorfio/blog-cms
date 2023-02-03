@@ -1,11 +1,11 @@
 /* eslint-disable no-underscore-dangle */
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { useOutletContext, Link } from 'react-router-dom';
 
 // State Decalarations
 
 function Home() {
-  const [user, isLoggedIn, users, posts, msgs] = useOutletContext();
+  const [user, isLoggedIn] = useOutletContext(); // Passing on current logged in user
 
   return (
     <main id="home">

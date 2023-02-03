@@ -1,31 +1,31 @@
 /* eslint-disable no-underscore-dangle */
-import React, { useState, useEffect } from 'react';
-import { useOutletContext, Link } from 'react-router-dom';
+import React, { useState } from 'react';
+import { useOutletContext } from 'react-router-dom';
 
 function Users() {
-  const [user, isLoggedIn, users, setUsers, fetchUsers, posts, msgs] = useOutletContext();
+  const [user, isLoggedIn, // Passing on current logged in user
+    users, setUsers, fetchUsers,
+    posts, setPosts, fetchPosts,
+    msgs, setMsgs, fetchMsgs] = useOutletContext();
 
   // --------- CREATE User ---------
   const [formData, setFormData] = useState({
     username: '',
     password: '',
-    admin: '',
+    admin: false,
   });
 
   const addUser = async (e) => {
     e.preventDefault();
     try {
     // Send post request
-      const res = await fetch('https://blog-api-production-6aeb.up.railway.app/users/create', {
+      await fetch('https://blog-api-production-6aeb.up.railway.app/users/create', {
         method: 'POST',
         headers: { 'Content-type': 'application/json; charset=UTF-8' },
         body: JSON.stringify(formData),
       });
-      // Check data
-      const data = await res.json();
-      if (data.success) {
-        console.log('Registration successful');
-      } else { console.log('data was not a success'); }
+      console.log('Created user!');
+      fetchUsers();
     } catch (err) { console.error(err); }
   };
 
@@ -33,12 +33,11 @@ function Users() {
   const updateUser = async (usr) => {
     try {
     // Send post request
-      const res = await fetch(`https://blog-api-production-6aeb.up.railway.app/users/${usr._id}`, {
+      await fetch(`https://blog-api-production-6aeb.up.railway.app/users/${usr._id}`, {
         method: 'PUT',
         headers: { 'Content-type': 'application/json; charset=UTF-8' },
         body: JSON.stringify(usr),
       });
-      const data = await res.json();
       console.log(`User updated! ${usr._id}`);
       fetchUsers();
     } catch (err) { console.error(err); }

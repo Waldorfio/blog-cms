@@ -33,7 +33,7 @@ function App() {
   };
   const fetchMsgs = async () => {
     try {
-      const res = await fetch('https://blog-api-production-6aeb.up.railway.app/posts', { method: 'GET' });
+      const res = await fetch('https://blog-api-production-6aeb.up.railway.app/msgs', { method: 'GET' });
       const data = await res.json();
       setMsgs(data);
     } catch (err) { console.error(err); }
@@ -45,10 +45,10 @@ function App() {
   }, []);
   useEffect(() => {
     fetchPosts();
-  }, [posts]);
+  }, []);
   useEffect(() => {
     fetchMsgs();
-  }, [msgs]);
+  }, []);
 
   // State Handlers
   // const loginSubmit = (event) => {
@@ -138,7 +138,9 @@ function App() {
       <Outlet
         context={[
           user, isLoggedIn, // Passing on current logged in user
-          users, setUsers, fetchUsers, posts, msgs,
+          users, setUsers, fetchUsers,
+          posts, setPosts, fetchPosts,
+          msgs, setMsgs, fetchMsgs,
         ]}
       />
 

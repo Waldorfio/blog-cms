@@ -11,7 +11,7 @@ function Header(props) {
       <Link to="/messages" className="links"><h4>Messages</h4></Link>
       <div />
       <button id="login-btn" onClick={handleLogin}>Log in</button>
-      <Link to="register"><button>Register</button></Link>
+      <Link to="register"><button id="register-btn">Register</button></Link>
     </header>
   );
 }
