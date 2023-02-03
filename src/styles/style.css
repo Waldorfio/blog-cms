@@ -127,11 +127,18 @@ button:hover {
 
 /* USERS, POSTS, MESSAGES
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
-.cms-form {
+.cms-form, .labels {
     display: grid;
     grid-template-columns: repeat(3, 160px) repeat(3, 70px);
     gap: 5px;
     justify-content: center;
+}
+.labels {justify-items: center}
+.labels > span {
+    text-transform: capitalize;
+    font-weight: 500;
+    font-size: 1.0em;
+    padding-bottom: 10px;
 }
 .cms-form > input {
     margin-bottom: 1.3rem;
