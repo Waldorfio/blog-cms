@@ -10,16 +10,17 @@ function Messages() {
 
   // --------- CREATE Msg ---------
   const [formData, setFormData] = useState({
+    postid: '',
     username: '',
     date: '',
     text: '',
   });
 
-  const addMsg = async (e, msg) => {
+  const addMsg = async (e) => {
     e.preventDefault();
     try {
       // Send post request
-      await fetch(`https://blog-api-production-6aeb.up.railway.app/posts/${msg.postid}/msg/create`, {
+      await fetch(`https://blog-api-production-6aeb.up.railway.app/posts/${formData.postid}/msg/create`, {
         method: 'POST',
         headers: { 'Content-type': 'application/json; charset=UTF-8' },
         body: JSON.stringify(formData),
@@ -60,6 +61,37 @@ function Messages() {
         <span>Date</span>
         <span>Message</span>
       </div>
+
+      <form id="cms-newmsg" className="cms-form">
+        <select name="post" onChange={(e) => setFormData({ ...formData, postid: e.target.value })}>
+          { posts.map((post) => (
+            <option value={post._id}>{post.title}</option>
+          )) }
+        </select>
+        <input
+          type="text"
+          name="username"
+          placeholder="Enter username"
+          value={formData.username}
+          onChange={(e) => setFormData({ ...formData, username: e.target.value })}
+        />
+        <input
+          type="date"
+          name="date"
+          placeholder="Enter date"
+          value={formData.date_formatted}
+          onChange={(e) => setFormData({ ...formData, date: e.target.value })}
+        />
+        <input
+          type="textarea"
+          name="text"
+          placeholder="Type message here"
+          value={formData.text}
+          onChange={(e) => setFormData({ ...formData, text: e.target.value })}
+        />
+        <input type="button" value="CREATE" onClick={addMsg} />
+      </form>
+
       { posts.map((post) => (
         <h4 className="form-content" id="msg-content">
           {post.title}
@@ -112,37 +144,6 @@ function Messages() {
           )) }
         </h4>
       )) }
-      <form id="cms-newmsg" className="cms-form">
-        <input
-          type="range"
-          name="post"
-          placeholder="Select Post"
-          value={formData.postid}
-          onChange={(e) => setFormData({ ...formData, postid: e.target.value })}
-        />
-        <input
-          type="text"
-          name="username"
-          placeholder="Enter username"
-          value={formData.username}
-          onChange={(e) => setFormData({ ...formData, username: e.target.value })}
-        />
-        <input
-          type="date"
-          name="date"
-          placeholder="Enter date"
-          value={formData.date_formatted}
-          onChange={(e) => setFormData({ ...formData, date: e.target.value })}
-        />
-        <input
-          type="textarea"
-          name="text"
-          placeholder="Type message here"
-          value={formData.text}
-          onChange={(e) => setFormData({ ...formData, text: e.target.value })}
-        />
-        <input type="button" value="CREATE" onClick={addMsg} />
-      </form>
     </main>
   );
 }
